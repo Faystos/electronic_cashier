@@ -6,14 +6,30 @@ body {
 }
 
 table {
+  margin: 0 auto;
+  text-align: left;
+  padding: 0 20px;
+}
+
+.main_table {
+  width: 50%;
   border: 1px solid black;
   border-collapse: collapse;
-  margin: 0 auto;
-  width: 50%;
   min-height: 300px;
   text-align: center;
+  padding: 0;
+}
+
+.main_td {
+  border: 1px solid black;
+  text-align: center;
+  padding: 0 15px;
+}
+
+tr {
+  border: 1px solid black;
 }
 
 td {
-  border: 1px solid black;
+  height: 45px;
 }
