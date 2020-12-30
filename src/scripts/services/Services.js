@@ -7,7 +7,7 @@ class Services {
 
   getResource = async (url) => {
     const res = await fetch(`${url}`);
-    if(!res.ok) throw new Error(`Ошибка загрузки ${url}, статус соединения ${res.status}.`);
+    if(!res.ok) throw new Error(`Ошибка загрузки ${url}, статус соединения ${res.status}.`);    
     return await res.json();
   }
 
