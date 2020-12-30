@@ -2,8 +2,7 @@ export default class Table {
 
   constructor() {
     this.body = document.querySelector('body');
-  }
-  
+  } 
 
   init = arr => {
     const mainTable = this.createMainTable(arr);    
@@ -34,50 +33,64 @@ export default class Table {
   }
 
   createTBody = (arr) => {
-    const tName = arr.map(el => {     
-      const { post } = el;      
-     
-      const tPost = post.map(post => {
-        return `
+    const tData = this.createData(arr);
+    const tBody = `
+      <tbody>
+        ${tData}
+      </tbody>    
+    `;
+    return tBody;
+  };
+
+  createData = arr => {
+    return arr.map(el => {     
+      const { name, post } = el;      
+      const tName = this.inputName(name);
+      const tPost = this.intupPost(post);
+      const tComment = this.inputCommentsLength(post);
+      return this.inputData(tName, tPost, tComment);
+    }).join('');
+  }
+
+  inputName = name => {
+    return ` <td class='main_td'>${name}</td>`;
+  }
+
+  intupPost = post => {
+    return post.map(post => {
+      return `
         <tr>
           <td>Пост: ${post.title}</td>
         </tr>  
-        `;
-      }).join(' ');
-
-      const tComment = post.map(post => {
-        return `
-        <tr>
-          <td>${post.comment.length}</td>
-        </tr>  
-        `;
-      }).join(' ');
-
-
-      return`
-        <tr>
-          <td class='main_td'>${el.name}</td>
-          <td class='main_td'>
-            <table>
-              ${tPost}      
-            </table>
-          </td>
-          <td class='main_td'>
-            <table>
-              ${tComment}      
-            </table>
-          </td>
-        </tr>
       `;
-    }).join(' ');
-    
+    }).join('');
+  }
 
-    const tBody = `
-      <tbody>
-        ${tName}
-      </tbody>    
+  inputCommentsLength = post => {
+    return post.map(post => {
+      return `
+        <tr>
+          <td class='comment_td'>${post.comment.length}</td>
+        </tr>  
+      `;
+    }).join('');
+  }
+
+  inputData = (name, post, comment) => {
+    return `
+      <tr>
+        ${name}
+        <td class='main_td'>
+          <table>
+            ${post}      
+          </table>
+        </td>
+        <td class='main_td'>
+          <table>
+            ${comment}      
+          </table>
+        </td>
+      </tr>
     `;
-
-    return tBody;
-  };
+  }
 }

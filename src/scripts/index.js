@@ -5,15 +5,27 @@ import Table from './views/Table';
 
 const store = new Store(services);
 const table = new Table();
+// const tComments = document.querySelectorAll('.comment_td');
 
 document.addEventListener('DOMContentLoaded', () => {
   initApp();  
 });
 
-
 async function initApp() {
-  await store.init(); 
+  await store.init();
   table.init(store.normalisePerson);
-  // console.log(store.normalisePerson); 
+
+  const tComments = document.querySelectorAll('.comment_td');
+  tComments.forEach(comment => {
+    comment.addEventListener('click', ({target})=> {
+
+      console.log(store.init());
+      
+      
+      initApp();
+    });
+  });
+  
 }
+
 

@@ -1,7 +1,6 @@
 export default class Store {
   constructor(services) {
     this.api = services;
-
     this.peoples = null;
     this.comments = null;
     this.posts = null; 
