@@ -6,9 +6,12 @@ class Services {
   }
 
   getResource = async (url) => {
-    const res = await fetch(`${url}`);
-    if(!res.ok) throw new Error(`Ошибка загрузки ${url}, статус соединения ${res.status}.`);    
-    return await res.json();
+    try {
+      const res = await fetch(`${url}`);
+      return await res.json();
+    } catch {
+      throw new Error(`Ошибка загрузки ${url}, статус соединения ${res.status}.`); 
+    }
   }
 
   getAllPeoples = async () => {

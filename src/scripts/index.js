@@ -7,35 +7,27 @@ import Preloader from './views/Preloader';
 const store = new Store(services);
 const table = new Table();
 const preloader = new Preloader();
-console.log(preloader.preloaderInit());
-
 
 document.addEventListener('DOMContentLoaded', () => {
   initApp();
-
 });
 
 async function initApp() {
   await store.init();
-  table.init(store.normalisePerson); 
- 
-  
-  
+  table.init(store.normalisePerson);
   const tComment = document.querySelectorAll(`.comment_td`);
+  updateTable(tComment, initApp);  
+}
 
-  tComment.forEach(el => {
-   
+function updateTable (tComment, promise) {
+  tComment.forEach(el => {   
     el.addEventListener('click', ()=> {
       el.innerHTML = '';
       el.innerHTML = preloader.preloaderInit();
-      initApp()
+      promise()
       .then(() => {
         document.querySelector(`.main_table`).remove();    
-      });
-      
-      
+      });      
     });
   });
 }
-
-
